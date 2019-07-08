@@ -66,8 +66,8 @@ func parseASTUniqueFields(file *ast.File) []string {
 	return uniqueKeys
 }
 
-func parseASTStructs(file *ast.File) (typeNameAndStruct map[string]*ast.StructType) {
-	typeNameAndStruct = map[string]*ast.StructType{}
+func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
+	fieldAndType := map[string]string{}
 	ast.Inspect(file, func(node ast.Node) bool {
 		lastChildNode := node == nil
 		if lastChildNode {
@@ -79,14 +79,33 @@ func parseASTStructs(file *ast.File) (typeNameAndStruct map[string]*ast.StructTy
 			return continueTraverse
 		}
 
+		if typeSpec.Name.Name != entityName {
+			return continueTraverse
+		}
+
 		structType, ok := typeSpec.Type.(*ast.StructType)
 		if !ok {
 			return continueTraverse
 		}
 
-		name := typeSpec.Name.Name
-		typeNameAndStruct[name] = structType
+		for _, f := range structType.Fields.List {
+			fieldName := f.Names[0].Name
+			if fieldName == entityName+"R" {
+				continue
+			}
+			if fieldName == entityName+"L" {
+				continue
+			}
+			fieldType, ok := f.Type.(*ast.Ident)
+			if !ok {
+				fmt.Printf("[WARNINGS]⚠  Unexpected field type : %v\n", f.Type)
+				continue
+			}
+			fieldAndType[fieldName] = fieldType.Name
+		}
+
 		return continueTraverse
 	})
-	return
+
+	return fieldAndType
 }

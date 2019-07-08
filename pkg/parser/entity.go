@@ -8,8 +8,12 @@ type Entity struct {
 }
 
 func (p Entity) Parse() {
-	for typeName, structType := range parseASTStructs(parseASTFile(p.FilePath)) {
+	for fieldName, typeName := range parseASTFieldAndType(parseASTFile(p.FilePath), p.extractStructName()) {
+		fmt.Printf("structType = %+v\n", fieldName)
 		fmt.Printf("typeName = %+v\n", typeName)
-		fmt.Printf("structType = %+v\n", structType)
 	}
+}
+
+func (p Entity) extractStructName() string {
+	return ""
 }

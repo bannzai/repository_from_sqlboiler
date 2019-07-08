@@ -5,14 +5,12 @@ import (
 	"io/ioutil"
 )
 
-type File struct {
-	FilePath string
-}
+type File struct{}
 
-func (f File) Read() string {
-	data, err := ioutil.ReadFile(f.FilePath)
+func (File) Read(filePath string) string {
+	data, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		panic(fmt.Errorf("Can not read %v, and got error :%v", f.FilePath, err))
+		panic(fmt.Errorf("Can not read %v, and got error :%v", filePath, err))
 	}
 	return string(data)
 }

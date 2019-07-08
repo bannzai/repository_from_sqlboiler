@@ -1,5 +1,5 @@
 package parser
 
-type fileReader interface {
-	Read() string
+type FileReader interface {
+	Read(filePath string) string
 }

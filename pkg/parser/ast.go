@@ -98,7 +98,7 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 			}
 			fieldType, ok := f.Type.(*ast.Ident)
 			if !ok {
-				fmt.Printf("[WARNINGS]⚠  Unexpected field type : %v\n", f.Type)
+				fmt.Printf("[WARNING]⚠  Unexpected field type : %v\n", f.Type)
 				continue
 			}
 			fieldAndType[fieldName] = fieldType.Name

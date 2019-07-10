@@ -45,8 +45,7 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		source := generateOptions.sourceFilePath
 		destination := generateOptions.destinationFilePath
-	tmpl:
-		-generateOptions.templateFilePath
+		tmpl := generateOptions.templateFilePath
 		g := generator.GoCodeGenerator{
 			DestinationFilePath: destination,
 			EntityParser: parser.Entity{

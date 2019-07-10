@@ -59,7 +59,7 @@ func specializeIfMatched(
 	return str
 }
 
-func SpecializeToLowerCamelCase(str string) string {
+func SpecializeLowerCamelCase(str string) string {
 	return specializeIfMatched(str, lowerSpecializeKeywords, LowerCamelCase)
 }
 

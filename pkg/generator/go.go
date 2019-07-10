@@ -98,7 +98,7 @@ func sqlQueryArguments(entity model.Entity) string {
 			condition += ", "
 		}
 		column := strutil.SnakeCase(primaryKey.Name)
-		condition += fmt.Sprintf("qm.Where(\"%v\"=?, %v)", column, column)
+		condition += fmt.Sprintf("qm.Where(\"%v=?\", %v)", column, column)
 	}
 
 	return condition

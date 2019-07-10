@@ -1,14 +1,34 @@
 package generator
 
-import "github.com/bannzai/repository_from_sqlboiler/pkg/writer"
+import (
+	"bytes"
+
+	"github.com/bannzai/repository_from_sqlboiler/pkg/model"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/writer"
+)
 
 type GoCodeGenerator struct {
-	SourceCodeReader
+	DestinationFilePath string
+	EntityParser
 	GoFormatter
+	TemplateReader
 	Writer writer.FileWriter
 }
 
 func (generator GoCodeGenerator) Generate() {
-	sourceCode := generator.SourceCodeReader.Read()
+	entity := generator.EntityParser.Parse()
+	content := generator.Content(entity)
+	generator.Writer.Write(content)
+	generator.GoImports()
+	generator.GoFormat()
+}
 
+func (generator GoCodeGenerator) Content(entity model.Entity) string {
+	buf := &bytes.Buffer{}
+	if err := generator.TemplateReader.Read(generator.DestinationFilePath).Execute(buf, map[string]interface{}{
+		"Entity": entity,
+	}); err != nil {
+		panic(err)
+	}
+	return buf.String()
 }

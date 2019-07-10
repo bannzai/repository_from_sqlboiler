@@ -17,7 +17,7 @@ func SnakeCase(str string) string {
 func camelCase(str string) string {
 	firstString := strings.ToLower(str[:1])
 	droppedFirstString := str[1:]
-	matchRegex := regexp.MustCompile("(_[a-zA-Z]+)")
+	matchRegex := regexp.MustCompile("(_[a-zA-Z])")
 	tailContent := matchRegex.ReplaceAllStringFunc(droppedFirstString, func(matched string) string {
 		underscore := "_"
 		return strings.ToUpper(matched[len(underscore):])

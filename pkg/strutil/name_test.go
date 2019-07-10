@@ -11,7 +11,20 @@ func TestSnakeCase(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "lcc to snake",
+			args: args{
+				str: "userRepository",
+			},
+			want: "user_repository",
+		},
+		{
+			name: "ucc to snake",
+			args: args{
+				str: "UserRepository",
+			},
+			want: "user_repository",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -31,7 +44,20 @@ func Test_camelCase(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "ucc to lcc",
+			args: args{
+				str: "UserRepository",
+			},
+			want: "userRepository",
+		},
+		{
+			name: "snake to lcc",
+			args: args{
+				str: "user_repository",
+			},
+			want: "userRepository",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -51,7 +77,20 @@ func TestLowerCamelCase(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "ucc to lcc",
+			args: args{
+				str: "UserRepository",
+			},
+			want: "userRepository",
+		},
+		{
+			name: "snake to lcc",
+			args: args{
+				str: "user_repository",
+			},
+			want: "userRepository",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -71,7 +110,20 @@ func TestUpperCamelCase(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "lcc to ucc",
+			args: args{
+				target: "userRepository",
+			},
+			want: "UserRepository",
+		},
+		{
+			name: "snake to ucc",
+			args: args{
+				target: "user_repository",
+			},
+			want: "UserRepository",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

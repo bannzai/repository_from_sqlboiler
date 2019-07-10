@@ -38,9 +38,9 @@ func Test_parseASTPrimaryKeyFields(t *testing.T) {
 		want []string
 	}{
 		{
-			name: "Get primary keys from testdata/a.go User",
+			name: "Get primary keys from testdata/user.go User",
 			args: args{
-				file: parseASTFile(workingDirectory + "/testdata/a.go"),
+				file: parseASTFile(workingDirectory + "/testdata/user.go"),
 			},
 			want: []string{"id", "name"},
 		},
@@ -55,6 +55,7 @@ func Test_parseASTPrimaryKeyFields(t *testing.T) {
 }
 
 func Test_parseASTFieldAndType(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		file       *ast.File
 		entityName string
@@ -64,7 +65,18 @@ func Test_parseASTFieldAndType(t *testing.T) {
 		args args
 		want map[string]string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Get fields from testdata/user.go User",
+			args: args{
+				file:       parseASTFile(workingDirectory + "/testdata/user.go"),
+				entityName: "User",
+			},
+			want: map[string]string{
+				"ID":        "uint",
+				"Name":      "string",
+				"CreatedAt": "time.Time",
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

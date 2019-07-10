@@ -92,10 +92,10 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 
 		for _, f := range structType.Fields.List {
 			fieldName := f.Names[0].Name
-			if fieldName == strutil.LowerCamelCase(entityName)+"R" {
+			if fieldName == "R" {
 				continue
 			}
-			if fieldName == strutil.LowerCamelCase(entityName)+"L" {
+			if fieldName == "L" {
 				continue
 			}
 			switch fieldType := f.Type.(type) {

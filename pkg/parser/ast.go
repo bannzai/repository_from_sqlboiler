@@ -27,7 +27,7 @@ func parseASTFile(filePath string) *ast.File {
 	return astFile
 }
 
-func parseASTUniqueFields(file *ast.File) []string {
+func pearseASTPrimaryKeyFiels(file *ast.File) []string {
 	uniqueKeys := []string{}
 
 	ast.Inspect(file, func(node ast.Node) bool {

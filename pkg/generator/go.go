@@ -3,6 +3,7 @@ package generator
 import (
 	"bytes"
 	"fmt"
+	"strings"
 
 	"github.com/bannzai/repository_from_sqlboiler/pkg/model"
 	"github.com/bannzai/repository_from_sqlboiler/pkg/strutil"
@@ -63,7 +64,7 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 	findPrimaryKeyType := func(primaryKey model.PrimaryKey, entity model.Entity) string {
 		typeName := ""
 		for _, column := range entity.Fields {
-			if column.Name == primaryKey.Name {
+			if strings.ToLower(column.Name) == strings.ToLower(primaryKey.Name) {
 				typeName = column.TypeName
 			}
 		}

@@ -58,7 +58,7 @@ func parseASTPrimaryKeyFields(file *ast.File) []string {
 
 		for _, element := range fieldsNamesExpr.Elts {
 			if basicLit, ok := element.(*ast.BasicLit); ok {
-				uniqueKeys = append(uniqueKeys, basicLit.Value)
+				uniqueKeys = append(uniqueKeys, strings.ReplaceAll(basicLit.Value, "\"", ""))
 			}
 		}
 

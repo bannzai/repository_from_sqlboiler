@@ -40,29 +40,26 @@ var (
 	upperSpecializeKeywords = func() []string {
 		uppers := make([]string, len(lowerSpecializeKeywords))
 		for i, lower := range lowerSpecializeKeywords {
-			uppers[i] = lower
+			uppers[i] = strings.ToUpper(lower)
 		}
 		return uppers
 	}()
 )
 
-func specializeIfMatched(
-	str string,
-	specliazedKeywords []string,
-	specialize func(string) string,
-) string {
-	for _, keyword := range specliazedKeywords {
+func SpecializeLowerCamelCase(str string) string {
+	for _, keyword := range upperSpecializeKeywords {
 		if keyword == str {
-			return specialize(str)
+			return strings.ToLower(str)
 		}
 	}
-	return str
-}
-
-func SpecializeLowerCamelCase(str string) string {
-	return specializeIfMatched(str, lowerSpecializeKeywords, LowerCamelCase)
+	return LowerCamelCase(str)
 }
 
 func SpecializeUpperCamelCase(str string) string {
-	return specializeIfMatched(str, upperSpecializeKeywords, UpperCamelCase)
+	for _, keyword := range lowerSpecializeKeywords {
+		if keyword == str {
+			return strings.ToUpper(str)
+		}
+	}
+	return UpperCamelCase(str)
 }

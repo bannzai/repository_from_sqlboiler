@@ -17,13 +17,13 @@ type GoCodeGenerator struct {
 
 func (generator GoCodeGenerator) Generate() {
 	entity := generator.EntityParser.Parse()
-	content := generator.Content(entity)
+	content := generator.content(entity)
 	generator.Writer.Write(content)
 	generator.GoImports()
 	generator.GoFormat()
 }
 
-func (generator GoCodeGenerator) Content(entity model.Entity) string {
+func (generator GoCodeGenerator) content(entity model.Entity) string {
 	buf := &bytes.Buffer{}
 	if err := generator.TemplateReader.Read(generator.DestinationFilePath).Execute(buf, map[string]interface{}{
 		"Entity": entity,

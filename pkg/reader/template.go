@@ -1,6 +1,7 @@
 package reader
 
 import (
+	"path/filepath"
 	"text/template"
 
 	"github.com/bannzai/repository_from_sqlboiler/pkg/strutil"
@@ -19,5 +20,6 @@ var functions = template.FuncMap{
 
 func (t Template) Read() *template.Template {
 	filePath := t.FilePath
-	return template.Must(template.New(filePath).Funcs(functions).ParseFiles(filePath))
+	base := filepath.Base(filePath)
+	return template.Must(template.New(base).Funcs(functions).ParseFiles(filePath))
 }

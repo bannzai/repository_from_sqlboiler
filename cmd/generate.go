@@ -25,6 +25,7 @@ import (
 )
 
 type GenerateOptions struct {
+	templateFilePath    string
 	sourceFilePath      string
 	destinationFilePath string
 }
@@ -44,6 +45,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		source := generateOptions.sourceFilePath
 		destination := generateOptions.destinationFilePath
+	tmpl:
+		-generateOptions.templateFilePath
 		g := generator.GoCodeGenerator{
 			DestinationFilePath: destination,
 			EntityParser: parser.Entity{
@@ -52,7 +55,9 @@ to quickly create a Cobra application.`,
 			GoFormatter: formatter.GoFormatter{
 				FilePath: destination,
 			},
-			TemplateReader: reader.Template{},
+			TemplateReader: reader.Template{
+				FilePath: tmpl,
+			},
 			Writer: writer.File{
 				FilePath: destination,
 			},
@@ -66,5 +71,6 @@ func init() {
 	const invalidGenerateValue = ""
 	generateCmd.Flags().StringVar(&generateOptions.sourceFilePath, "source", invalidGenerateValue, "source entity file for generate repository.")
 	generateCmd.Flags().StringVar(&generateOptions.destinationFilePath, "destination", invalidGenerateValue, "destination repository file path.")
+	generateCmd.Flags().StringVar(&generateOptions.templateFilePath, "template", invalidGenerateValue, "template file path for generate repository source code.")
 
 }

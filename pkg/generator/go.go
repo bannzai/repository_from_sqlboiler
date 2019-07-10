@@ -25,7 +25,7 @@ func (generator GoCodeGenerator) Generate() {
 
 func (generator GoCodeGenerator) content(entity model.Entity) string {
 	buf := &bytes.Buffer{}
-	if err := generator.TemplateReader.Read(generator.DestinationFilePath).Execute(buf, map[string]interface{}{
+	if err := generator.TemplateReader.Read().Execute(buf, map[string]interface{}{
 		"Entity": entity,
 	}); err != nil {
 		panic(err)

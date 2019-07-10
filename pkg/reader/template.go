@@ -12,7 +12,8 @@ type Template struct {
 
 var functions = template.FuncMap{
 	"sqlParameterCase":     strutil.SnakeCase,
-	"golangArgumentCase":   strutil.SpecializeToLowerCamelCase,
+	"golangArgumentCase":   strutil.SpecializeLowerCamelCase,
+	"golangVariableCase":   strutil.SpecializeLowerCamelCase,
 	"golangStructNameCase": strutil.SpecializeUpperCamelCase,
 }
 

@@ -31,6 +31,7 @@ func (generator GoCodeGenerator) content(entity model.Entity) string {
 		"Entity":            entity,
 		"FetchByPrimaryKey": fetchByPrimaryKey(entity),
 		"SQLQueryArguments": sqlQueryArguments(entity),
+		"PrimaryKeys":       listOfPrimaryKeys(entity),
 	}); err != nil {
 		panic(err)
 	}
@@ -82,8 +83,15 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 	return condition
 }
 
-func sqlQueryArguments(entity model.Entity) string {
+func listOfPrimaryKeys(entity model.Entity) string {
+	content := ""
+	for _, primaryKey := range entity.PrimaryKeys {
+		content += primaryKey.Name
+	}
+	return content
+}
 
+func sqlQueryArguments(entity model.Entity) string {
 	condition := ""
 	for i, primaryKey := range entity.PrimaryKeys {
 		if i > 0 {

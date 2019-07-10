@@ -28,14 +28,22 @@ func (generator GoCodeGenerator) Generate() {
 func (generator GoCodeGenerator) content(entity model.Entity) string {
 	buf := &bytes.Buffer{}
 	if err := generator.TemplateReader.Read().Execute(buf, map[string]interface{}{
-		"Entity":                            entity,
-		"FetchByPrimaryKeyFunctionName":     fetchByPrimaryKeyFunctionName(entity),
-		"FetchByPrimaryKeyFunctionArgument": fetchByPrimaryKeyFunctionArgument(entity),
-		"SQLQueryArguments":                 sqlQueryArguments(entity),
+		"Entity":            entity,
+		"FetchByPrimaryKey": fetchByPrimaryKey(entity),
+		"SQLQueryArguments": sqlQueryArguments(entity),
 	}); err != nil {
 		panic(err)
 	}
 	return buf.String()
+}
+
+func fetchByPrimaryKey(entity model.Entity) string {
+	return fmt.Sprintf(
+		"%v(%v) %v",
+		fetchByPrimaryKeyFunctionName(entity),
+		fetchByPrimaryKeyFunctionArgument(entity),
+		entity.Name,
+	)
 }
 
 func fetchByPrimaryKeyFunctionName(entity model.Entity) string {

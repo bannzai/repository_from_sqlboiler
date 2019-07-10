@@ -2,6 +2,7 @@ package parser
 
 import (
 	"go/ast"
+	"os"
 	"reflect"
 	"testing"
 )
@@ -27,6 +28,7 @@ func Test_parseASTFile(t *testing.T) {
 }
 
 func Test_parseASTPrimaryKeyFields(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		file *ast.File
 	}
@@ -35,7 +37,13 @@ func Test_parseASTPrimaryKeyFields(t *testing.T) {
 		args args
 		want []string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Get primary keys from testdata/a.go User",
+			args: args{
+				file: parseASTFile(workingDirectory + "/testdata/a.go"),
+			},
+			want: []string{"id", "name"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

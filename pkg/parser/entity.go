@@ -21,7 +21,7 @@ func (p Entity) Parse() model.Entity {
 
 func (p Entity) mapPrimaryKeys() []model.PrimaryKey {
 	primaryKeys := []model.PrimaryKey{}
-	for _, primaryKeyName := range parseASTFieldAndType(parseASTFile(p.FilePath), p.extractEntityName()) {
+	for _, primaryKeyName := range parseASTPrimaryKeyFields(parseASTFile(p.FilePath)) {
 		primaryKeys = append(
 			primaryKeys,
 			model.PrimaryKey{

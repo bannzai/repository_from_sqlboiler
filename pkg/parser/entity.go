@@ -9,7 +9,6 @@ import (
 
 type Entity struct {
 	FilePath string
-	FileReader
 }
 
 func (p Entity) Parse() model.Entity {

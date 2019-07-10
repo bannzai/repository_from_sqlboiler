@@ -16,8 +16,11 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/bannzai/repository_from_sqlboiler/pkg/formatter"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/generator"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/parser"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/reader"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/writer"
 	"github.com/spf13/cobra"
 )
 
@@ -39,7 +42,22 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("generate called")
+		source := generateOptions.sourceFilePath
+		destination := generateOptions.destinationFilePath
+		g := generator.GoCodeGenerator{
+			DestinationFilePath: destination,
+			EntityParser: parser.Entity{
+				FilePath: source,
+			},
+			GoFormatter: formatter.GoFormatter{
+				FilePath: destination,
+			},
+			TemplateReader: reader.Template{},
+			Writer: writer.File{
+				FilePath: destination,
+			},
+		}
+		g.Generate()
 	},
 }
 

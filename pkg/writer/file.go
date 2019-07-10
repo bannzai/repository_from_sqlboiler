@@ -14,7 +14,7 @@ type FileWriter interface {
 	Write(content string)
 }
 
-func (f File) WriteFile(content string) {
+func (f File) Write(content string) {
 	if err := ioutil.WriteFile(f.FilePath, []byte(content), 0644); err != nil {
 		panic(err)
 	}

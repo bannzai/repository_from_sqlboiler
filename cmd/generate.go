@@ -22,7 +22,8 @@ import (
 )
 
 type GenerateOptions struct {
-	sourceFilePath string
+	sourceFilePath      string
+	destinationFilePath string
 }
 
 var generateOptions = GenerateOptions{}
@@ -46,5 +47,6 @@ func init() {
 	rootCmd.AddCommand(generateCmd)
 	const invalidGenerateValue = ""
 	generateCmd.Flags().StringVar(&generateOptions.sourceFilePath, "source", invalidGenerateValue, "source entity file for generate repository.")
+	generateCmd.Flags().StringVar(&generateOptions.destinationFilePath, "destination", invalidGenerateValue, "destination repository file path.")
 
 }

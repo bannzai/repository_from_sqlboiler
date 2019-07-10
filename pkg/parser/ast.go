@@ -7,6 +7,8 @@ import (
 	"go/token"
 	"io/ioutil"
 	"strings"
+
+	"github.com/bannzai/repository_from_sqlboiler/pkg/strutil"
 )
 
 const (
@@ -79,7 +81,7 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 			return continueTraverse
 		}
 
-		if typeSpec.Name.Name != entityName {
+		if typeSpec.Name.Name != strutil.UpperCamelCase(entityName) {
 			return continueTraverse
 		}
 
@@ -90,18 +92,27 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 
 		for _, f := range structType.Fields.List {
 			fieldName := f.Names[0].Name
-			if fieldName == entityName+"R" {
+			if fieldName == strutil.LowerCamelCase(entityName)+"R" {
 				continue
 			}
-			if fieldName == entityName+"L" {
+			if fieldName == strutil.LowerCamelCase(entityName)+"L" {
 				continue
 			}
-			fieldType, ok := f.Type.(*ast.Ident)
-			if !ok {
+			switch fieldType := f.Type.(type) {
+			case *ast.Ident:
+				fieldAndType[fieldName] = fieldType.Name
+			case *ast.SelectorExpr:
+				packageName, ok := fieldType.X.(*ast.Ident)
+				if !ok {
+					fmt.Printf("[WARNING]⚠  Unexpected field type : %v\n", f.Type)
+					continue
+				}
+				selector := fieldType.Sel
+				fieldAndType[fieldName] = packageName.Name + "." + selector.Name
+			default:
 				fmt.Printf("[WARNING]⚠  Unexpected field type : %v\n", f.Type)
 				continue
 			}
-			fieldAndType[fieldName] = fieldType.Name
 		}
 
 		return continueTraverse

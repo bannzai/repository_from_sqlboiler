@@ -250,7 +250,20 @@ func TestPlural(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "user to users",
+			args: args{
+				str: "user",
+			},
+			want: "users",
+		},
+		{
+			name: "community to communities",
+			args: args{
+				str: "community",
+			},
+			want: "communities",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

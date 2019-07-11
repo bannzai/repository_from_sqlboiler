@@ -7,8 +7,6 @@ import (
 	"go/token"
 	"io/ioutil"
 	"strings"
-
-	"github.com/bannzai/repository_from_sqlboiler/pkg/strutil"
 )
 
 const (
@@ -81,7 +79,7 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 			return continueTraverse
 		}
 
-		if typeSpec.Name.Name != strutil.UpperCamelCase(entityName) {
+		if typeSpec.Name.Name != entityName {
 			return continueTraverse
 		}
 

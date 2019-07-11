@@ -86,3 +86,23 @@ func Test_parseASTFieldAndType(t *testing.T) {
 		})
 	}
 }
+
+func Test_parseASTBaseStructName(t *testing.T) {
+	type args struct {
+		file *ast.File
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := parseASTBaseStructName(tt.args.file); got != tt.want {
+				t.Errorf("parseASTBaseStructName() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

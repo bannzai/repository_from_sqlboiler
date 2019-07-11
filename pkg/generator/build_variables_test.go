@@ -1,0 +1,136 @@
+package generator
+
+import (
+	"os"
+	"testing"
+
+	"github.com/bannzai/repository_from_sqlboiler/pkg/model"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/parser"
+)
+
+func Test_fetchByPrimaryKey(t *testing.T) {
+	type args struct {
+		entity model.Entity
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := fetchByPrimaryKey(tt.args.entity); got != tt.want {
+				t.Errorf("fetchByPrimaryKey() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_fetchByPrimaryKeyFunctionName(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
+	type args struct {
+		entity model.Entity
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "FetchByIDAndFullName",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := fetchByPrimaryKeyFunctionName(tt.args.entity); got != tt.want {
+				t.Errorf("fetchByPrimaryKeyFunctionName() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
+	type args struct {
+		entity model.Entity
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "id uint, fullName string",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := fetchByPrimaryKeyFunctionArgument(tt.args.entity); got != tt.want {
+				t.Errorf("fetchByPrimaryKeyFunctionArgument() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_listOfPrimaryKeys(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
+	type args struct {
+		entity model.Entity
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "id, full_name",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := listOfPrimaryKeys(tt.args.entity); got != tt.want {
+				t.Errorf("listOfPrimaryKeys() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_sqlQueryArguments(t *testing.T) {
+	type args struct {
+		entity model.Entity
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := sqlQueryArguments(tt.args.entity); got != tt.want {
+				t.Errorf("sqlQueryArguments() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

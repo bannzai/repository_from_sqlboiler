@@ -45,7 +45,7 @@ func Test_fetchByPrimaryKeyFunctionName(t *testing.T) {
 					FilePath: workingDirectory + "/testdata/user.go",
 				}.Parse(),
 			},
-			want: "FetchByIDAndFullName",
+			want: "FetchByIDAndTypeAndFullName",
 		},
 	}
 	for _, tt := range tests {
@@ -74,7 +74,7 @@ func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
 					FilePath: workingDirectory + "/testdata/user.go",
 				}.Parse(),
 			},
-			want: "id uint, fullName string",
+			want: "id uint, _type string, fullName string",
 		},
 	}
 	for _, tt := range tests {
@@ -103,7 +103,7 @@ func Test_listOfPrimaryKeys(t *testing.T) {
 					FilePath: workingDirectory + "/testdata/user.go",
 				}.Parse(),
 			},
-			want: "id, full_name",
+			want: "id, _type, full_name",
 		},
 	}
 	for _, tt := range tests {

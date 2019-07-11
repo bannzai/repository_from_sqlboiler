@@ -44,7 +44,17 @@ var (
 		}
 		return uppers
 	}()
+	reservedWords = []string{"type"}
 )
+
+func EscapedReservedWord(str string) string {
+	for _, word := range reservedWords {
+		if word == str {
+			str = "_" + str
+		}
+	}
+	return str
+}
 
 func SpecializeLowerCamelCase(str string) string {
 	for _, keyword := range upperSpecializeKeywords {

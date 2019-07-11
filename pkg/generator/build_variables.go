@@ -49,6 +49,7 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 			condition += ", "
 		}
 		column := strutil.SpecializeLowerCamelCase(primaryKey.Name)
+		column = strutil.EscapedReservedWord(column)
 		typeName := findPrimaryKeyType(primaryKey, entity)
 		condition += fmt.Sprintf("%v %v", column, typeName)
 	}
@@ -62,7 +63,7 @@ func listOfPrimaryKeys(entity model.Entity) string {
 		if i > 0 {
 			content += ", "
 		}
-		content += primaryKey.Name
+		content += strutil.EscapedReservedWord(primaryKey.Name)
 	}
 	return content
 }

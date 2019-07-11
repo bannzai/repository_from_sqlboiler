@@ -1,6 +1,8 @@
 package strutil
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSnakeCase(t *testing.T) {
 	type args struct {
@@ -181,6 +183,39 @@ func TestSpecializeUpperCamelCase(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := SpecializeUpperCamelCase(tt.args.str); got != tt.want {
 				t.Errorf("SpecializeUpperCamelCase() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_EscapedReservedWord(t *testing.T) {
+	type args struct {
+		str string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Add _ for Reserved word",
+			args: args{
+				str: "type",
+			},
+			want: "_type",
+		},
+		{
+			name: "Not convert keyword",
+			args: args{
+				str: "xx",
+			},
+			want: "xx",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := EscapedReservedWord(tt.args.str); got != tt.want {
+				t.Errorf("EscapedReservedWord() = %v, want %v", got, tt.want)
 			}
 		})
 	}

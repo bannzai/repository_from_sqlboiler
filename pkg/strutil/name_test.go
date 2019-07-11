@@ -197,7 +197,20 @@ func Test_escapedReservedWord(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Add _ for Reserved word",
+			args: args{
+				str: "type",
+			},
+			want: "_type",
+		},
+		{
+			name: "Not convert keyword",
+			args: args{
+				str: "xx",
+			},
+			want: "xx",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

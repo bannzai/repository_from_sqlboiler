@@ -88,6 +88,7 @@ func Test_parseASTFieldAndType(t *testing.T) {
 }
 
 func Test_parseASTBaseStructName(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		file *ast.File
 	}
@@ -96,7 +97,13 @@ func Test_parseASTBaseStructName(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Get entity name from testdata/user.go User",
+			args: args{
+				file: parseASTFile(workingDirectory + "/testdata/user.go"),
+			},
+			want: "User",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

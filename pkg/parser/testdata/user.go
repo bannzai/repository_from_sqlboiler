@@ -10,7 +10,7 @@ import (
 // User is an object representing the database table.
 type User struct {
 	ID        uint      `boil:"id" json:"id" toml:"id" yaml:"id"`
-	Name      string    `boil:"name" json:"name" toml:"name" yaml:"name"`
+	FullName  string    `boil:"full_name" json:"full_name" toml:"full_name" yaml:"full_name"`
 	CreatedAt time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 
 	R *userR `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -18,7 +18,7 @@ type User struct {
 }
 
 var (
-	userPrimaryKeyColumns = []string{"id", "name"}
+	userPrimaryKeyColumns = []string{"id", "full_name"}
 )
 
 type userR struct{}

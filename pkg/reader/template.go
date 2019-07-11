@@ -16,6 +16,7 @@ var functions = template.FuncMap{
 	"golangArgumentCase":   golangArgumentCase,
 	"golangVariableCase":   golangVariableCase,
 	"golangStructNameCase": strutil.SpecializeUpperCamelCase,
+	"plural":               strutil.Plural,
 }
 
 func golangArgumentCase(str string) string {

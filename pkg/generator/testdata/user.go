@@ -1,1 +1,1 @@
-pkg/parser/testdata/user.go
+user.go

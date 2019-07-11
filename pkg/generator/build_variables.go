@@ -58,7 +58,10 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 
 func listOfPrimaryKeys(entity model.Entity) string {
 	content := ""
-	for _, primaryKey := range entity.PrimaryKeys {
+	for i, primaryKey := range entity.PrimaryKeys {
+		if i > 0 {
+			content += ", "
+		}
 		content += primaryKey.Name
 	}
 	return content

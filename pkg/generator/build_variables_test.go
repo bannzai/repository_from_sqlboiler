@@ -29,6 +29,7 @@ func Test_fetchByPrimaryKey(t *testing.T) {
 }
 
 func Test_fetchByPrimaryKeyFunctionName(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		entity model.Entity
 	}
@@ -37,7 +38,15 @@ func Test_fetchByPrimaryKeyFunctionName(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "FetchByIDAndFullName",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -78,6 +87,7 @@ func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
 }
 
 func Test_listOfPrimaryKeys(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		entity model.Entity
 	}
@@ -86,7 +96,15 @@ func Test_listOfPrimaryKeys(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "id, full_name",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

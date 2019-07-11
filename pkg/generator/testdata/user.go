@@ -1,1 +1,1 @@
-user.go
+../../parser/testdata/user.go

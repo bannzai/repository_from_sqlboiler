@@ -33,7 +33,10 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 	findPrimaryKeyType := func(primaryKey model.PrimaryKey, entity model.Entity) string {
 		typeName := ""
 		for _, column := range entity.Fields {
-			if strings.ToLower(column.Name) == strings.ToLower(primaryKey.Name) {
+			// Remove _ and same character size.
+			lhs := strings.ToLower(strutil.LowerCamelCase(column.Name))
+			rhs := strings.ToLower(strutil.LowerCamelCase(primaryKey.Name))
+			if lhs == rhs {
 				typeName = column.TypeName
 			}
 		}

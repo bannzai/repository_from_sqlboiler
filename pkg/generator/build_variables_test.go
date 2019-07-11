@@ -1,9 +1,11 @@
 package generator
 
 import (
+	"os"
 	"testing"
 
 	"github.com/bannzai/repository_from_sqlboiler/pkg/model"
+	"github.com/bannzai/repository_from_sqlboiler/pkg/parser"
 )
 
 func Test_fetchByPrimaryKey(t *testing.T) {
@@ -47,6 +49,7 @@ func Test_fetchByPrimaryKeyFunctionName(t *testing.T) {
 }
 
 func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		entity model.Entity
 	}
@@ -55,7 +58,15 @@ func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "id uint, fullName string",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

@@ -116,6 +116,7 @@ func Test_listOfPrimaryKeys(t *testing.T) {
 }
 
 func Test_sqlQueryArguments(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		entity model.Entity
 	}
@@ -124,7 +125,15 @@ func Test_sqlQueryArguments(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Mapped primary key informations for where condition",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "qm.Where(\"id=?\", id), qm.Where(\"type=?\", _type), qm.Where(\"full_name=?\", fullName)",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

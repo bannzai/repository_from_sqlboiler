@@ -75,7 +75,9 @@ func sqlQueryArguments(entity model.Entity) string {
 			condition += ", "
 		}
 		column := strutil.SnakeCase(primaryKey.Name)
-		condition += fmt.Sprintf("qm.Where(\"%v=?\", %v)", column, column)
+		variable := strutil.LowerCamelCase(primaryKey.Name)
+		variable = strutil.EscapedReservedWord(variable)
+		condition += fmt.Sprintf("qm.Where(\"%v=?\", %v)", column, variable)
 	}
 
 	return condition

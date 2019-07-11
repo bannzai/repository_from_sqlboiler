@@ -1,10 +1,13 @@
 
+clean:
+	rm -f ./repository_from_sqlboiler
 
-dry-run:
-	go run main.go
+dry-run: clean build
+	./script/development/generate.sh
 
 build:
 	go build -o repository_from_sqlboiler
 
 source: 
 	cp $(SOURCE_SQLBOILER_PATH)/*.go local/source
+

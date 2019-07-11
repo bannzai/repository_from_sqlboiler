@@ -13,3 +13,6 @@ source:
 
 test: 
 	go test ./pkg/...
+
+install:
+	go install github.com/bannzai/repository_from_sqlboiler

@@ -9,6 +9,7 @@ import (
 )
 
 func Test_fetchByPrimaryKey(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
 	type args struct {
 		entity model.Entity
 	}
@@ -17,7 +18,15 @@ func Test_fetchByPrimaryKey(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "Mapped primary key information",
+			args: args{
+				entity: parser.Entity{
+					FilePath: workingDirectory + "/testdata/user.go",
+				}.Parse(),
+			},
+			want: "FetchByIDAndTypeAndFullName(id uint, _type string, fullName string) entity.User",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

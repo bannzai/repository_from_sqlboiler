@@ -10,7 +10,7 @@ import (
 
 func fetchByPrimaryKey(entity model.Entity) string {
 	return fmt.Sprintf(
-		"%v(%v) %v",
+		"%v(%v) entity.%v",
 		fetchByPrimaryKeyFunctionName(entity),
 		fetchByPrimaryKeyFunctionArgument(entity),
 		entity.Name,

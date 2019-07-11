@@ -42,7 +42,7 @@ func Test_parseASTPrimaryKeyFields(t *testing.T) {
 			args: args{
 				file: parseASTFile(workingDirectory + "/testdata/user.go"),
 			},
-			want: []string{"id", "full_name"},
+			want: []string{"id", "type", "full_name"},
 		},
 	}
 	for _, tt := range tests {
@@ -73,6 +73,7 @@ func Test_parseASTFieldAndType(t *testing.T) {
 			},
 			want: map[string]string{
 				"ID":        "uint",
+				"Type":      "string",
 				"FullName":  "string",
 				"CreatedAt": "time.Time",
 			},
@@ -82,6 +83,33 @@ func Test_parseASTFieldAndType(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := parseASTFieldAndType(tt.args.file, tt.args.entityName); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("parseASTFieldAndType() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_parseASTBaseStructName(t *testing.T) {
+	workingDirectory, _ := os.Getwd()
+	type args struct {
+		file *ast.File
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "Get entity name from testdata/user.go User",
+			args: args{
+				file: parseASTFile(workingDirectory + "/testdata/user.go"),
+			},
+			want: "User",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := parseASTBaseStructName(tt.args.file); got != tt.want {
+				t.Errorf("parseASTBaseStructName() = %v, want %v", got, tt.want)
 			}
 		})
 	}

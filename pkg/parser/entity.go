@@ -1,10 +1,7 @@
 package parser
 
 import (
-	"path/filepath"
-
 	"github.com/bannzai/repository_from_sqlboiler/pkg/model"
-	"github.com/bannzai/repository_from_sqlboiler/pkg/strutil"
 )
 
 type Entity struct {
@@ -43,9 +40,5 @@ func (p Entity) mapFields() []model.Field {
 }
 
 func (e Entity) extractEntityName() string {
-	filename := filepath.Base(e.FilePath)
-	extension := filepath.Ext(e.FilePath)
-	snakeCaseEntityName := filename[0 : len(filename)-len(extension)]
-	entityName := strutil.UpperCamelCase(snakeCaseEntityName)
-	return entityName
+	return parseASTBaseStructName(parseASTFile(e.FilePath))
 }

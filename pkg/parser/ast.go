@@ -120,3 +120,32 @@ func parseASTFieldAndType(file *ast.File, entityName string) map[string]string {
 
 	return fieldAndType
 }
+
+func parseASTBaseStructName(file *ast.File) string {
+	name := ""
+	ast.Inspect(file, func(node ast.Node) bool {
+		if len(name) > 0 {
+			return endTraverse
+		}
+		lastChildNode := node == nil
+		if lastChildNode {
+			return endTraverse
+		}
+
+		genDecl, ok := node.(*ast.GenDecl)
+		if !ok {
+			return continueTraverse
+		}
+
+		typeSpec, ok := genDecl.Specs[0].(*ast.TypeSpec)
+		if !ok {
+			return continueTraverse
+		}
+
+		// FIXME: Get first typeSpec.Name.Name. But want other good idea.
+		name = typeSpec.Name.Name
+		return continueTraverse
+	})
+
+	return name
+}

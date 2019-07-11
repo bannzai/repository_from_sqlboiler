@@ -43,7 +43,7 @@ func fetchByPrimaryKeyFunctionArgument(entity model.Entity) string {
 		return typeName
 	}
 
-	condition := ""
+	condition := "ctx context.Context, "
 	for i, primaryKey := range entity.PrimaryKeys {
 		if i > 0 {
 			condition += ", "

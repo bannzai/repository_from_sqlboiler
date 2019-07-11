@@ -25,7 +25,7 @@ func Test_fetchByPrimaryKey(t *testing.T) {
 					FilePath: workingDirectory + "/testdata/user.go",
 				}.Parse(),
 			},
-			want: "FetchByIDAndTypeAndFullName(id uint, _type string, fullName string) entity.User",
+			want: "FetchByIDAndTypeAndFullName(ctx context.Context, id uint, _type string, fullName string) entity.User",
 		},
 	}
 	for _, tt := range tests {
@@ -83,7 +83,7 @@ func Test_fetchByPrimaryKeyFunctionArgument(t *testing.T) {
 					FilePath: workingDirectory + "/testdata/user.go",
 				}.Parse(),
 			},
-			want: "id uint, _type string, fullName string",
+			want: "ctx context.Context, id uint, _type string, fullName string",
 		},
 	}
 	for _, tt := range tests {

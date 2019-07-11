@@ -188,7 +188,7 @@ func TestSpecializeUpperCamelCase(t *testing.T) {
 	}
 }
 
-func Test_escapedReservedWord(t *testing.T) {
+func Test_EscapedReservedWord(t *testing.T) {
 	type args struct {
 		str string
 	}
@@ -214,8 +214,8 @@ func Test_escapedReservedWord(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := escapedReservedWord(tt.args.str); got != tt.want {
-				t.Errorf("escapedReservedWord() = %v, want %v", got, tt.want)
+			if got := EscapedReservedWord(tt.args.str); got != tt.want {
+				t.Errorf("EscapedReservedWord() = %v, want %v", got, tt.want)
 			}
 		})
 	}

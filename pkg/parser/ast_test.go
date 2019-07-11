@@ -42,7 +42,7 @@ func Test_parseASTPrimaryKeyFields(t *testing.T) {
 			args: args{
 				file: parseASTFile(workingDirectory + "/testdata/user.go"),
 			},
-			want: []string{"id", "full_name"},
+			want: []string{"id", "type", "full_name"},
 		},
 	}
 	for _, tt := range tests {
@@ -73,6 +73,7 @@ func Test_parseASTFieldAndType(t *testing.T) {
 			},
 			want: map[string]string{
 				"ID":        "uint",
+				"Type":      "string",
 				"FullName":  "string",
 				"CreatedAt": "time.Time",
 			},

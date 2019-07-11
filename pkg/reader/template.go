@@ -13,9 +13,19 @@ type Template struct {
 
 var functions = template.FuncMap{
 	"sqlParameterCase":     strutil.SnakeCase,
-	"golangArgumentCase":   strutil.SpecializeLowerCamelCase,
-	"golangVariableCase":   strutil.SpecializeLowerCamelCase,
+	"golangArgumentCase":   golangArgumentCase,
+	"golangVariableCase":   golangVariableCase,
 	"golangStructNameCase": strutil.SpecializeUpperCamelCase,
+}
+
+func golangArgumentCase(str string) string {
+	return golangVariableCase(str)
+}
+
+func golangVariableCase(str string) string {
+	str = strutil.SpecializeLowerCamelCase(str)
+	str = strutil.EscapedReservedWord(str)
+	return str
 }
 
 func (t Template) Read() *template.Template {

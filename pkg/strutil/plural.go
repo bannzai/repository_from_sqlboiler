@@ -15,6 +15,9 @@ func Plural(str string) string {
 		if len(key) > len(str) {
 			continue
 		}
+		if len(key) <= 0 {
+			continue
+		}
 		if key == str[len(str)-len(key):] {
 			replaced := str[:len(str)-len(key)] + converted
 			return replaced

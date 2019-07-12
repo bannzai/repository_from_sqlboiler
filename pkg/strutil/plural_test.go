@@ -30,7 +30,7 @@ func TestPlural(t *testing.T) {
 			args: args{
 				str: "JSON",
 			},
-			want: "Jsons",
+			want: "JSONs",
 		},
 	}
 	for _, tt := range tests {

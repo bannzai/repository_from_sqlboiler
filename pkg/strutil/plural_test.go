@@ -25,6 +25,13 @@ func TestPlural(t *testing.T) {
 			},
 			want: "communities",
 		},
+		{
+			name: "JSON to Jsons",
+			args: args{
+				str: "JSON",
+			},
+			want: "Jsons",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

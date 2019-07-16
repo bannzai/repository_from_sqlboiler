@@ -34,7 +34,12 @@ func PluralSuffix(str string) string {
 		return str
 	}
 
-	if _, err := strconv.Atoi(str[len(str)-1:]); err == nil {
+	lastCharacter := str[len(str)-1:]
+	if _, err := strconv.Atoi(lastCharacter); err == nil {
+		return str + "S"
+	}
+
+	if IsUpper([]rune(lastCharacter)[0]) {
 		return str + "S"
 	}
 

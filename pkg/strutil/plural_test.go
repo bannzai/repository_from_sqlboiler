@@ -54,18 +54,18 @@ func TestPluralSuffix(t *testing.T) {
 			want: "Ganmas",
 		},
 		{
-			name: "JSON to JSONs",
-			args: args{
-				str: "JSON",
-			},
-			want: "JSONs",
-		},
-		{
 			name: "A1 to A1S",
 			args: args{
 				str: "A1",
 			},
 			want: "A1S",
+		},
+		{
+			name: "XXXX to XXXXS",
+			args: args{
+				str: "XXXX",
+			},
+			want: "XXXXS",
 		},
 	}
 	for _, tt := range tests {

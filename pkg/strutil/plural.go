@@ -1,7 +1,6 @@
 package strutil
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 )
@@ -57,6 +56,5 @@ func PluralSuffix(str string) string {
 		return str[0:len(str)-1] + "ies"
 	}
 
-	fmt.Printf("str = %v\n", str)
 	return str + "s"
 }

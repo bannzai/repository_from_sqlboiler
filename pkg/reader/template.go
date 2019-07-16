@@ -17,7 +17,7 @@ var functions = template.FuncMap{
 	"golangArgumentCase":   golangArgumentCase,
 	"golangVariableCase":   golangVariableCase,
 	"golangStructNameCase": golangStructNameCase,
-	"plural":               strutil.Plural,
+	"plural":               strutil.PluralSuffix,
 	"entitySelectorName":   entitySelectorName,
 }
 
@@ -53,7 +53,7 @@ func entitySelectorName(str string) string {
 			str = strings.ReplaceAll(str, keyword, converted)
 		}
 	}
-	str = strutil.Plural(str)
+	str = strutil.PluralSuffix(str)
 	return str
 }
 

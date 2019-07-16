@@ -5,12 +5,14 @@ import (
 	"regexp"
 )
 
-var ruleSets = map[string]string{
-	"": "",
+// NOTE: reference https://github.com/volatiletech/inflect/blob/e7201282ae8da26cd97aed2e516f75c0bd91bb93/inflect_test.go#L17
+var SingularToPlural = map[string]string{
+	"datum": "data",
 }
 
-func Plural(str string) string {
+func PluralSuffix(str string) string {
 	// specialize Rule
+	ruleSets := SingularToPlural
 	for key, converted := range ruleSets {
 		if len(key) > len(str) {
 			continue
@@ -20,6 +22,10 @@ func Plural(str string) string {
 		}
 		if key == str[len(str)-len(key):] {
 			replaced := str[:len(str)-len(key)] + converted
+			return replaced
+		}
+		if UpperCamelCase(key) == str[len(str)-len(key):] {
+			replaced := str[:len(str)-len(key)] + UpperCamelCase(converted)
 			return replaced
 		}
 	}

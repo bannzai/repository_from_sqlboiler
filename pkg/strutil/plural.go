@@ -94,8 +94,9 @@ var SingularToPlural = map[string]string{
 	"database":    "databases",
 }
 
-func Plural(str string) string {
+func PluralSuffix(str string) string {
 	// specialize Rule
+	ruleSets := SingularToPlural
 	for key, converted := range ruleSets {
 		if len(key) > len(str) {
 			continue
@@ -105,6 +106,10 @@ func Plural(str string) string {
 		}
 		if key == str[len(str)-len(key):] {
 			replaced := str[:len(str)-len(key)] + converted
+			return replaced
+		}
+		if UpperCamelCase(key) == str[len(str)-len(key):] {
+			replaced := str[:len(str)-len(key)] + UpperCamelCase(converted)
 			return replaced
 		}
 	}

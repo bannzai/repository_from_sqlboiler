@@ -40,6 +40,20 @@ func TestPluralSuffix(t *testing.T) {
 			want: "Data",
 		},
 		{
+			name: "ganma to ganmas",
+			args: args{
+				str: "ganma",
+			},
+			want: "ganmas",
+		},
+		{
+			name: "Ganma to Ganmas",
+			args: args{
+				str: "Ganma",
+			},
+			want: "Ganmas",
+		},
+		{
 			name: "JSON to JSONs",
 			args: args{
 				str: "JSON",

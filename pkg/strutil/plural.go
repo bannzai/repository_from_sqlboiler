@@ -7,8 +7,6 @@ import (
 
 // NOTE: reference https://github.com/volatiletech/inflect/blob/e7201282ae8da26cd97aed2e516f75c0bd91bb93/inflect_test.go#L17
 var SingularToPlural = map[string]string{
-	"i":           "i",
-	"a":           "a",
 	"us":          "us",
 	"is":          "is",
 	"as":          "as",

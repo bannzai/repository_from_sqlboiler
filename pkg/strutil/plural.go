@@ -7,9 +7,6 @@ import (
 
 // NOTE: reference https://github.com/volatiletech/inflect/blob/e7201282ae8da26cd97aed2e516f75c0bd91bb93/inflect_test.go#L17
 var SingularToPlural = map[string]string{
-	"us":          "us",
-	"is":          "is",
-	"as":          "as",
 	"search":      "searches",
 	"switch":      "switches",
 	"fix":         "fixes",
@@ -80,7 +77,6 @@ var SingularToPlural = map[string]string{
 	"matrix fu":   "matrix fu",
 	"matrix fus":  "matrix fus",
 	"fus":         "fus",
-	"fu":          "fu",
 	"axis":        "axes",
 	"testis":      "testes",
 	"crisis":      "crises",

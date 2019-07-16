@@ -16,7 +16,7 @@ var functions = template.FuncMap{
 	"sqlParameterCase":     strutil.SnakeCase,
 	"golangArgumentCase":   golangArgumentCase,
 	"golangVariableCase":   golangVariableCase,
-	"golangStructNameCase": strutil.SpecializeUpperCamelCase,
+	"golangStructNameCase": golangStructNameCase,
 	"plural":               strutil.Plural,
 	"entitySelectorName":   entitySelectorName,
 }
@@ -41,6 +41,10 @@ var lowercaseWords = map[string]string{
 	"URI":   "Uri",
 	"URL":   "Url",
 	"UTF8":  "Utf8",
+}
+
+func golangStructNameCase(entityName string) string {
+	return entityName
 }
 
 func entitySelectorName(str string) string {

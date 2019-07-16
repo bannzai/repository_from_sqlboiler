@@ -3,6 +3,7 @@ package strutil
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 )
 
 // NOTE: reference https://github.com/volatiletech/inflect/blob/e7201282ae8da26cd97aed2e516f75c0bd91bb93/inflect_test.go#L17
@@ -29,11 +30,15 @@ func PluralSuffix(str string) string {
 			return replaced
 		}
 	}
-
 	// normalize convert plural
 	if len(str) < 2 {
 		return str
 	}
+
+	if _, err := strconv.Atoi(str); err == nil {
+		return str + "S"
+	}
+
 	if str[len(str)-1:] == "s" ||
 		str[len(str)-2:] == "sh" ||
 		str[len(str)-2:] == "ch" ||

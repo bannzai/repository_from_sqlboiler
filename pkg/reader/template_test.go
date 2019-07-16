@@ -41,6 +41,20 @@ func Test_entitySelectorName(t *testing.T) {
 			},
 			want: "XJsons",
 		},
+		{
+			name: "A1 to A1S",
+			args: args{
+				str: "A1",
+			},
+			want: "A1S",
+		},
+		{
+			name: "XXXX to XXXXS",
+			args: args{
+				str: "XXXX",
+			},
+			want: "XXXXS",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

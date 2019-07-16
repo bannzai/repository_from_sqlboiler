@@ -15,6 +15,9 @@ func SnakeCase(str string) string {
 
 // To Lower Camel case
 func camelCase(str string) string {
+	if len(str) <= 1 {
+		return strings.ToLower(str)
+	}
 	firstString := strings.ToLower(str[:1])
 	droppedFirstString := str[1:]
 	matchRegex := regexp.MustCompile("(_[a-zA-Z])")

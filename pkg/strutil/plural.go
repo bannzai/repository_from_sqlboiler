@@ -34,7 +34,7 @@ func PluralSuffix(str string) string {
 		return str
 	}
 
-	if _, err := strconv.Atoi(str); err == nil {
+	if _, err := strconv.Atoi(str[len(str)-1:]); err == nil {
 		return str + "S"
 	}
 

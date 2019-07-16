@@ -60,6 +60,13 @@ func TestPluralSuffix(t *testing.T) {
 			},
 			want: "JSONs",
 		},
+		{
+			name: "A1 to A1S",
+			args: args{
+				str: "A1",
+			},
+			want: "A1S",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

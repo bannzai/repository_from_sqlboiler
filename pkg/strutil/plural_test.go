@@ -26,7 +26,7 @@ func TestPlural(t *testing.T) {
 			want: "communities",
 		},
 		{
-			name: "JSON to Jsons",
+			name: "JSON to JSONs",
 			args: args{
 				str: "JSON",
 			},

@@ -53,8 +53,8 @@ func entitySelectorName(str string) string {
 			str = strings.ReplaceAll(str, keyword, converted)
 		}
 	}
-	str = strutil.PluralSuffix(str)
-	return str
+
+	return strutil.PluralSuffix(str)
 }
 
 func golangArgumentCase(str string) string {

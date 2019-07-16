@@ -1,9 +1,7 @@
 package reader
 
 import (
-	"reflect"
 	"testing"
-	"text/template"
 )
 
 func Test_entitySelectorName(t *testing.T) {
@@ -15,7 +13,34 @@ func Test_entitySelectorName(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "User to Users",
+			args: args{
+				str: "User",
+			},
+			want: "Users",
+		},
+		{
+			name: "CoordinateItem to CoordinateItems",
+			args: args{
+				str: "CoordinateItem",
+			},
+			want: "CoordinateItems",
+		},
+		{
+			name: "XyzJSON to XyzJsons",
+			args: args{
+				str: "XyzJSON",
+			},
+			want: "XyzJsons",
+		},
+		{
+			name: "XJSON to XJsons",
+			args: args{
+				str: "XJSON",
+			},
+			want: "XJsons",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -61,29 +86,6 @@ func Test_golangVariableCase(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := golangVariableCase(tt.args.str); got != tt.want {
 				t.Errorf("golangVariableCase() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestTemplate_Read(t *testing.T) {
-	type fields struct {
-		FilePath string
-	}
-	tests := []struct {
-		name   string
-		fields fields
-		want   *template.Template
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			t := Template{
-				FilePath: tt.fields.FilePath,
-			}
-			if got := t.Read(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Template.Read() = %v, want %v", got, tt.want)
 			}
 		})
 	}

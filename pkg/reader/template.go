@@ -21,11 +21,35 @@ var functions = template.FuncMap{
 	"entitySelectorName":   entitySelectorName,
 }
 
+// reference: https://github.com/volatiletech/sqlboiler/blob/4dea9a5f77e3ec6090ad455df3d408e47e077700/strmangle/strmangle.go#L25
+var lowercaseWords = map[string]string{
+	"ACL":   "Acl",
+	"API":   "Api",
+	"ASCII": "Ascii",
+	"CPU":   "Cpu",
+	"EOF":   "Eof",
+	"GUID":  "Guid",
+	"ID":    "Id",
+	"IP":    "Ip",
+	"JSON":  "Json",
+	"RAM":   "Ram",
+	"SLA":   "Sla",
+	"UDP":   "Udp",
+	"UI":    "Ui",
+	"UID":   "Uid",
+	"UUID":  "Uuid",
+	"URI":   "Uri",
+	"URL":   "Url",
+	"UTF8":  "Utf8",
+}
+
 func entitySelectorName(str string) string {
-	str = strings.ToLower(str)
-	str = strutil.SnakeCase(str)
+	for keyword, converted := range lowercaseWords {
+		if strings.Contains(str, keyword) {
+			str = strings.ReplaceAll(str, keyword, converted)
+		}
+	}
 	str = strutil.Plural(str)
-	str = strutil.UpperCamelCase(str)
 	return str
 }
 
